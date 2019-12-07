@@ -1,4 +1,4 @@
-const { app } = require('electron');
+const { app, ipcMain } = require('electron');
 const path = require('path');
 const TimerTray = require('./app/TimerTray');
 const MainWindow = require('./app/MainWindow');
@@ -14,4 +14,8 @@ app.on('ready', () => {
   const iconName = isWindows ? 'windows-icon.png' : 'iconTemplate.png';
   const iconPath = path.join(__dirname, `./src/assets/${iconName}`);
   tray = new TimerTray(iconPath, mainWindow);
+});
+
+ipcMain.on('timer:update', (event, timeLeft) => {
+  tray.setTitle(timeLeft);
 });

@@ -3,14 +3,14 @@ const { BrowserWindow } = require('electron');
 class MainWindow extends BrowserWindow {
   constructor(url) {
     super({
-      webPreferences: {
-        nodeIntegration: true
-      },
       height: 500,
       width: 300,
       frame: false,
       resizable: false,
-      show: false
+      show: false,
+      webPreferences: {
+        backgroundThrottling: false
+      }
     });
 
     this.loadURL(url);
